@@ -5,7 +5,7 @@ jobs:
       xcode: 13.2.1
     steps:
       - checkout
-      - run: pod install
+      #- run: pod install
       - run: fastlane scan
       - store_test_results:
           path: test_output
