@@ -5,7 +5,14 @@ jobs:
       xcode: 12.5.1
     steps:
       - checkout
+      - run: pod install
       - run: fastlane scan
+      - store_test_results:
+          path: test_output
+      - store_artifacts:
+          path: test_output
+          destination: scan-output
+
   deploy:
     macos:
       xcode: 12.5.1
@@ -19,9 +26,4 @@ workflows:
   test_release:
     jobs:
       - test
-      - deploy:
-          requires:
-            test
-          filters:
-            branches:
-              only: release
+      
